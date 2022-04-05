@@ -352,25 +352,24 @@ const makeBadWord = async (guild, badword, type = 'add') => {
 exports.makeBadWord = makeBadWord;
 
 const welcomeImage = async (member, link) => {
-  const canvas = _canvas.default.createCanvas(705, 344);
+  _canvas.default.registerFont('./src/assets/fonts/Roboto-Regular.ttf', {
+    family: 'Roboto'
+  });
+
+  const canvas = _canvas.default.createCanvas(500, 285);
 
   const ctx = canvas.getContext('2d');
-  const font = 'Manrope';
   const fixedbkg = await _canvas.default.loadImage(link);
-  ctx.drawImage(fixedbkg, 0, 0, 705, 344);
-  ctx.strokeRect(0, 0, 705, 344);
+  ctx.drawImage(fixedbkg, 0, 0, 500, 285);
   let xname = member.user.username;
-  ctx.font = `bold 32px ${font}`;
+  ctx.font = `400 28px `;
   ctx.fillStyle = '#FFFFFF';
   ctx.textAlign = 'start';
-  ctx.strokeStyle = '#f5f5f5';
+  ctx.strokeStyle = '#FFFFFF';
   const name = xname;
-  xname.length > 16 ? xname.substring(0, 16).trim() + '...' : xname;
-  ctx.fillText(`${name}`, 348, 160);
-  ctx.strokeText(`${name}`, 348, 160);
-  ctx.font = `bold 32px ${font}`;
-  ctx.fillStyle = '#FFFFFF';
-  ctx.fillText(`#${member.user.discriminator}`, 348, 205);
+  xname.length > 10 ? xname.substring(0, 10).trim() + '...' : xname;
+  ctx.fillText(`${name}`, 240, 153);
+  ctx.strokeText(`${name}`, 240, 153);
   let image = await _jimp.default.read(member.user.displayAvatarURL({
     format: 'jpg',
     dynamic: true
@@ -380,7 +379,7 @@ const welcomeImage = async (member, link) => {
   let raw = await image.getBufferAsync('image/png');
   const avatar = await _canvas.default.loadImage(raw); // Draw a shape onto the main canvas
 
-  ctx.drawImage(avatar, 70, 98, 150, 150);
+  ctx.drawImage(avatar, 52.59, 69.78, 144.41, 146.00125);
   return canvas.toBuffer();
 };
 
@@ -437,7 +436,7 @@ const privateMessageServerData = async author => {
   const embed = new _discord.MessageEmbed().setColor('#ff0000').setDescription(_static.default.welcome.welcomePrivateMessage);
   author.send({
     embeds: [embed]
-  });
+  }).catch(err => {});
 };
 
 exports.privateMessageServerData = privateMessageServerData;

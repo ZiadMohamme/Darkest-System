@@ -128,6 +128,39 @@ client.on('interactionCreate', async interaction => {
 
   (0, _commands.commands)(interaction, client);
 }); // =========================================
+
+client.on('messageReactionAdd', async (reaction, user) => {
+  if (user.bot) return;
+  if (reaction.message.partial) await reaction.message.fetch();
+  const member = reaction.message.guild.members.cache.get(user.id);
+
+  _static.default.reactToRole.forEach(({
+    messageId,
+    reactions
+  }) => {
+    if (messageId === reaction.message.id) {
+      reactions.forEach(reactItem => {
+        if (reactItem.reaction === reaction.emoji.name) member.roles.add(reactItem.roleId);
+      });
+    }
+  });
+});
+client.on('messageReactionRemove', async (reaction, user) => {
+  if (user.bot) return;
+  if (reaction.message.partial) await reaction.message.fetch();
+  const member = reaction.message.guild.members.cache.get(user.id);
+
+  _static.default.reactToRole.forEach(({
+    messageId,
+    reactions
+  }) => {
+    if (messageId === reaction.message.id) {
+      reactions.forEach(reactItem => {
+        if (reactItem.reaction === reaction.emoji.name) member.roles.remove(reactItem.roleId);
+      });
+    }
+  });
+}); // =========================================
 // Empty TempChannels Watcher
 
 setTimeout(() => {

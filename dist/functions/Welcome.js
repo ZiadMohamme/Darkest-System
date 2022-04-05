@@ -14,7 +14,7 @@ var _static = _interopRequireDefault(require("../assets/static"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Welcome = async (welcomeChannel, member) => {
-  let data = await (0, _subFunctions.welcomeImage)(member, 'https://github.com/omarlawatey/Dunk-System/blob/main/Images/WelcomeImage.png?raw=true');
+  let data = await (0, _subFunctions.welcomeImage)(member, 'https://cdn.discordapp.com/attachments/861201851273052170/955986206934573057/b8963740e403dba9.png');
   const oldUser = await (0, _subFunctions.makeLastJoinedOne)(member.guild.id, member.id);
   const attachment = new _discord.MessageAttachment(data, 'welcome-image.png');
 
@@ -23,19 +23,14 @@ const Welcome = async (welcomeChannel, member) => {
       files: [attachment]
     }).then(msg => {
       msg.channel.send({
-        content: `> **Welcome** ${member}
-          > **Make Sure Read:** <#${_static.default.rulesChannelId}>
-          > **Total Member:** **${member.guild.memberCount}**
-          > **& Have a Nice Time With US**`
+        content: `> **Welcome To:** \`${member.guild.name}\`
+> **UserName:** ${member.user}
+> **Please Make Sure Read:** <#${_static.default.rulesChannelId}>
+> **Member Count:** \`${member.guild.memberCount}\`
+> **& I Hope To Enjoy With US.**`
       });
     }).then(async msg => {
-      (0, _subFunctions.makeWarn)(member.guild, member, 0, 'create');
-
-      try {
-        await (0, _subFunctions.privateMessageServerData)(member.user);
-      } catch (err) {
-        console.log(err);
-      }
+      (0, _subFunctions.makeWarn)(member.guild, member, 0, 'create'); // await privateMessageServerData(member.user);
     });
   }
 
