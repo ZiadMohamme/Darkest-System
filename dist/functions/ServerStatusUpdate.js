@@ -30,7 +30,7 @@ const ServerStatusUpdate = (guild) => {
       )
     );
     await channel.setName(
-      `●──『${fontGenerator(liveUpdate.name)}』${
+      `●──『${(0, _helpers.fontGenerator)(liveUpdate.name)}』${
         role.members.map((i) => i.name).length
       }`
     );
