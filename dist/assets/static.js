@@ -118,7 +118,7 @@ __**Versions**__
   logsChannelsId: '955754657051975680',
   serverInfoChannelId: '949561183122378813',
   liveStatus: {
-    liveCategoryId: '952835995580129301',
+    liveCategoryId: '956653381483655268',
     Roles: [{
       name: 'members',
       id: '955773099897389116'
