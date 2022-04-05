@@ -352,12 +352,7 @@ const makeBadWord = async (guild, badword, type = 'add') => {
 exports.makeBadWord = makeBadWord;
 
 const welcomeImage = async (member, link) => {
-  _canvas.default.registerFont('./src/assets/fonts/Roboto-Regular.ttf', {
-    family: 'Roboto'
-  });
-
   const canvas = _canvas.default.createCanvas(500, 285);
-
   const ctx = canvas.getContext('2d');
   const fixedbkg = await _canvas.default.loadImage(link);
   ctx.drawImage(fixedbkg, 0, 0, 500, 285);
